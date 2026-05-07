@@ -2,6 +2,13 @@
 
 All notable changes to `shipsfocus-mtech-lib` will be documented in this file
 
+## 2.3.1
+
+- Publish the Laravel 13 / PHP 8.4 compatible package metadata from the GitHub canonical repository.
+- Keep package constraints aligned for Laravel Framework `^12.0|^13.0`.
+- Keep `spatie/laravel-query-builder` compatibility aligned to `^6.4.4|^7.3`.
+- Update the compatibility notes in the README to match the released package metadata.
+
 ## 2.3.0
 
 - Add PHP 8.4 compatible package constraints via PHP `^8.3`.

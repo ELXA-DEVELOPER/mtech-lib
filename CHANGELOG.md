@@ -2,6 +2,15 @@
 
 All notable changes to `shipsfocus-mtech-lib` will be documented in this file
 
+## 2.3.0
+
+- Add PHP 8.4 compatible package constraints via PHP `^8.3`.
+- Add Laravel Framework `^13.0` support.
+- Update `spatie/laravel-query-builder` to the Laravel 12/13 compatible `^6.4.4` line.
+- Update package test dependencies to current Laravel 12/13 compatible versions.
+- Fix macro registration closure binding for modern PHP/Laravel runtimes.
+- Initialize resource fillable response arrays explicitly.
+
 ## 1.1.0
 
 - Add Resource extends from JsonResource.

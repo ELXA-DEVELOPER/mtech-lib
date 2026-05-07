@@ -20,6 +20,8 @@ abstract class Macro
     {
         $method = static::class . '::' . $methodName;
 
-        (static::$microableClass)::macro($methodName, fn(...$args) => call_user_func_array($method, [$this, ...$args]));
+        (static::$microableClass)::macro($methodName, function (...$args) use ($method) {
+            return call_user_func_array($method, [$this, ...$args]);
+        });
     }
 }

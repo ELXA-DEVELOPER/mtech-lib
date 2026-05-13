@@ -14,7 +14,7 @@ class NumberFilter implements Filter
     protected $value1;
     protected $value2;
 
-    public function __invoke(Builder $query, $values, string $property) : Builder
+    public function __invoke(Builder $query, mixed $values, string $property): void
     {
         $this->query = $query;
         $this->property = $property;
@@ -27,26 +27,30 @@ class NumberFilter implements Filter
             422, "Filter parameters for $property is incorrect."
         );
 
-        return $this->buildQuery();
+        $this->buildQuery();
     }
 
-    private function buildQuery() : Builder
+    private function buildQuery() : void
     {
         switch ($this->operator)
         {
             case 'is':
                 $queryMethod = 'where' . Str::studly($this->value1);
-                return in_array($queryMethod, ['whereNull', 'whereNotNull']) ?
-                    $this->query->{$queryMethod}($this->property) : $this->query;
+                if (in_array($queryMethod, ['whereNull', 'whereNotNull'])) {
+                    $this->query->{$queryMethod}($this->property);
+                }
+                break;
 
             case 'between':
-                return $this->query->whereBetween($this->property, [$this->value1, $this->value2]);
+                $this->query->whereBetween($this->property, [$this->value1, $this->value2]);
+                break;
 
             default:
-                return $this->query->whereRaw(
+                $this->query->whereRaw(
                     sprintf('%s %s ?', $this->property, $this->opTranslate($this->operator)),
                     $this->value1
                 );
+                break;
         }
     }
 

@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Builder;
 
 class RelationalNumberFilter extends FiltersPartial implements Filter
 {
-    public function __invoke(Builder $query, $values, string $property)
+    public function __invoke(Builder $query, mixed $values, string $property): void
     {
     	if ($this->isRelationProperty($query, $property)) {
-            return $this->withRelationConstraint($query, $values, $property);
+            $this->withRelationConstraint($query, $values, $property);
+            return;
         }
 
-        return (new NumberFilter)($query, $values, $property);
+        (new NumberFilter)($query, $values, $property);
     }
 }
 

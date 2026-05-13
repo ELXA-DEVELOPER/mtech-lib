@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Builder;
 
 class UserNameFilter implements Filter
 {
-    public function __invoke(Builder $query, $input, string $property) : Builder
+    public function __invoke(Builder $query, mixed $input, string $property): void
     {
-        return $query->whereHas($property, fn(Builder $q) =>
+        $query->whereHas($property, fn(Builder $q) =>
         	$q->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%{$input}%"])
         );
     }

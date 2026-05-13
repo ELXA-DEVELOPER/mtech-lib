@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ExcludeFilter implements Filter
 {
-    public function __invoke(Builder $query, $input, string $property) : Builder
+    public function __invoke(Builder $query, mixed $input, string $property): void
     {
-        return $query->where($property, '!=', $input);
+        $query->where($property, '!=', $input);
     }
 }
 
